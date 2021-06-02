@@ -9,7 +9,6 @@ const config = {
 	},
 	kit: {
 		adapter: adapter(),
-		target: '#root',
 		files: {
 			assets: 'public',
 			hooks: 'hooks',
