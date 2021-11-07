@@ -3,4 +3,5 @@ node_modules/
 functions/
 build/
 .svelte-kit/
+.vercel/
 .vercel_build_output/
