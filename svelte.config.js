@@ -2,11 +2,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import preprocess from 'svelte-preprocess'
-import adapter from '@sveltejs/adapter-vercel'
+import adapter from '@sveltejs/adapter-auto'
+import autoprefixer from 'autoprefixer'
+
+const styles = ['colors', 'font']
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: preprocess(),
+	preprocess: preprocess({
+		postcss: {
+			plugins: [autoprefixer()]
+		},
+		scss: {
+			prependData: styles.map(path => `@use 'styles/${path}';`).join('')
+		}
+	}),
 	compilerOptions: {
 		immutable: true
 	},
@@ -17,17 +27,13 @@ const config = {
 			hooks: 'hooks',
 			lib: 'lib',
 			routes: 'routes',
-			serviceWorker: 'lib/service-worker',
+			serviceWorker: 'lib/worker',
 			template: 'lib/index.html'
 		},
-		vite: {
-			server: {
-				fs: {
-					allow: ['.']
-				}
-			},
-			build: {
-				assetsInlineLimit: 0
+		csp: {
+			directives: {
+				'base-uri': ['self'],
+				'default-src': ['self']
 			}
 		}
 	}

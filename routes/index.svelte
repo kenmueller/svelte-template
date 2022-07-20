@@ -1,18 +1,27 @@
-<svelte:head>
-	<title>Hello, world!</title>
-</svelte:head>
+<script lang="ts">
+	import MetaImage from '../components/Meta/Image.svelte'
+	import MetaTitle from '../components/Meta/Title.svelte'
+	import MetaDescription from '../components/Meta/Description.svelte'
+</script>
+
+<MetaImage />
+<MetaTitle />
+<MetaDescription />
 
 <main>
-	<h1>Hello, world!</h1>
+	<h1>svelte-template</h1>
 </main>
 
 <style lang="scss">
 	main {
 		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		height: 100%;
 	}
 
 	h1 {
-		margin: auto;
+		text-align: center;
 	}
 </style>
