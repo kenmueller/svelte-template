@@ -9,16 +9,16 @@ import {
 
 type MaybePromise<Value> = Value | Promise<Value>
 
-const CACHE = `cache/${version}`
+const files = [...staticPages, ...buildFiles, ...staticFiles]
 
-const files = [...staticPages, ...buildFiles, ...staticFiles, '/']
+const cachedPages = ['/']
 
 const worker = self as unknown as ServiceWorkerGlobalScope
 
 worker.addEventListener('install', event => {
 	event.waitUntil(
-		caches.open(CACHE).then(async cache => {
-			await cache.addAll(files)
+		caches.open(version).then(async cache => {
+			await cache.addAll([...files, ...cachedPages])
 			await worker.skipWaiting()
 		})
 	)
@@ -27,39 +27,41 @@ worker.addEventListener('install', event => {
 worker.addEventListener('activate', event => {
 	event.waitUntil(
 		caches.keys().then(async keys => {
-			await Promise.all(keys.map(key => key === CACHE || caches.delete(key)))
+			await Promise.all(keys.map(key => key === version || caches.delete(key)))
 			await worker.clients.claim()
 		})
 	)
 })
 
 worker.addEventListener('fetch', event => {
-	if (event.request.method !== 'GET') return
+	const { request } = event
+	if (request.method !== 'GET') return
 
-	const url = new URL(event.request.url)
+	const { origin, pathname } = new URL(request.url)
+	if (origin !== worker.location.origin) return
 
-	if (url.origin !== worker.location.origin) return
-	if (!files.includes(url.pathname)) return
-
-	event.respondWith(stale(event.request))
+	event.respondWith(files.includes(pathname) ? stale(request) : fresh(request))
 })
 
 const stale = async (request: Request) =>
-	(await fromCache(request)) ?? save(request, caches.open(CACHE))
+	(await fromCache(request)) ?? save(request, caches.open(version))
 
-const fromCache = async (request: Request) => {
-	const response = await caches.match(request)
+const fresh = async (request: Request) => {
+	try {
+		return await save(request, caches.open(version))
+	} catch (error) {
+		const cached = await fromCache(request)
+		if (cached) return cached
 
-	if (!response) return null
-	if (!response.ok) throw new Error(await response.clone().text())
-
-	return response
+		throw error
+	}
 }
+
+const fromCache = async (request: Request) =>
+	(await caches.match(request)) ?? null
 
 const save = async (request: Request, cache: MaybePromise<Cache>) => {
 	const response = await fetch(request)
-	if (!response.ok) throw new Error(await response.text())
-
 	void saveTransaction(request, response.clone(), cache)
 
 	return response
