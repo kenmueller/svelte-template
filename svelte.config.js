@@ -18,7 +18,8 @@ const config = {
 		}
 	}),
 	compilerOptions: {
-		immutable: true
+		immutable: true,
+		hydratable: true
 	},
 	kit: {
 		adapter: adapter(),
