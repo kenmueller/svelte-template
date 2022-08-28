@@ -1,10 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 
-const plugins = [sveltekit()]
-
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins,
+	plugins: [sveltekit()],
 	server: {
 		fs: {
 			allow: ['.']

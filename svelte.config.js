@@ -36,7 +36,8 @@ const config = {
 				'base-uri': ['self'],
 				'default-src': ['self']
 			}
-		}
+		},
+		trailingSlash: 'never'
 	}
 }
 

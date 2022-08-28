@@ -1,5 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
+import { base } from '$app/paths'
+
 import errorFromValue from '$lib/error/from/value'
 
 const urls = ['/']
@@ -11,7 +13,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
 xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 \
 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\
 ${urls
-	.map(url => `<url><loc>${encodeURI(new URL(url, origin).href)}</loc></url>`)
+	.map(
+		url =>
+			`<url><loc>${encodeURI(
+				new URL(`${base}${url}`, origin).href
+			)}</loc></url>`
+	)
 	.join('')}\
 </urlset>`
 
