@@ -3,17 +3,12 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
-		"sourceMap": true,
-		"importsNotUsedAsValues": "error",
-		"useUnknownInCatchVariables": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"isolatedModules": true,
-		"resolveJsonModule": true,
-		"strict": true,
 		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true
+		"sourceMap": true,
+		"strict": true
 	},
 	"include": ["**/*.d.ts", "**/*.ts", "**/*.svelte"],
 	"exclude": ["node_modules", ".svelte-kit", "public"]

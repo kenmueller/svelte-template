@@ -1,21 +1,15 @@
-<script context="module" lang="ts">
-	export const load: Load = ({ url }) => ({
-		props: { url }
-	})
-</script>
-
 <script lang="ts">
-	import type { Load } from '@sveltejs/kit'
+	import type { LayoutData } from './$types'
 
 	import MetaBase from '../components/Meta/Base.svelte'
 	import PageTransition from '../components/Transition/Page.svelte'
 
-	export let url: URL
+	export let data: LayoutData
 </script>
 
 <MetaBase />
 
-<PageTransition {url}>
+<PageTransition key={data.path}>
 	<slot />
 </PageTransition>
 
@@ -34,6 +28,11 @@
 	html,
 	body {
 		height: 100%;
+	}
+
+	body {
+		// Position the two pages on top of each other
+		display: grid;
 	}
 
 	a {

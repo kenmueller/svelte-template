@@ -29,7 +29,7 @@ const config = {
 			lib: 'lib',
 			routes: 'routes',
 			serviceWorker: 'lib/worker',
-			template: 'lib/index.html'
+			appTemplate: 'lib/app.html'
 		},
 		csp: {
 			directives: {

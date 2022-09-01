@@ -1,5 +1,4 @@
-import type { RequestHandler } from '@sveltejs/kit'
-
+import type { RequestHandler } from './$types'
 import { base } from '$app/paths'
 
 import errorFromValue from '$lib/error/from/value'
@@ -12,15 +11,14 @@ let data: string | null = null
 
 export const GET: RequestHandler = ({ url }) => {
 	try {
-		return {
+		return new Response((data ??= robots(url)), {
 			headers: {
 				'cache-control': 'no-cache',
 				'content-type': 'text/plain'
-			},
-			body: (data ??= robots(url))
-		}
+			}
+		})
 	} catch (value) {
 		const { code, message } = errorFromValue(value)
-		return { status: code, body: message }
+		return new Response(message, { status: code })
 	}
 }
