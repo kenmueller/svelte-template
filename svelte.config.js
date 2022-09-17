@@ -25,7 +25,10 @@ const config = {
 		adapter: adapter(),
 		files: {
 			assets: 'public',
-			hooks: { server: 'hooks/index.server', client: 'hooks/index.client' },
+			hooks: {
+				server: 'hooks/index.server',
+				client: 'hooks/index.client'
+			},
 			lib: 'lib',
 			routes: 'routes',
 			serviceWorker: 'lib/worker',
