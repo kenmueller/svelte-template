@@ -19,13 +19,7 @@ const worker = self as unknown as ServiceWorkerGlobalScope
 worker.addEventListener('install', event => {
 	event.waitUntil(
 		caches.open(version).then(async cache => {
-			await cache.addAll([
-				...files,
-
-				// Remove the leading slash to create a relative URL
-				...cachedPages.map(path => path.slice(1))
-			])
-
+			await cache.addAll([...files, ...cachedPages])
 			await worker.skipWaiting()
 		})
 	)

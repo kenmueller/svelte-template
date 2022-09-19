@@ -1,7 +1,6 @@
 import type { WebAppManifest } from 'web-app-manifest'
 
 import type { RequestHandler } from './$types'
-import { base } from '$app/paths'
 
 import errorFromValue from '$lib/error/from/value'
 
@@ -11,8 +10,8 @@ import mask from '../../images/mask.png'
 const manifest: WebAppManifest = {
 	dir: 'ltr',
 	lang: 'en-US',
-	scope: base || '/',
-	start_url: base || '/',
+	scope: '/',
+	start_url: '/',
 	name: 'svelte-template',
 	short_name: 'svelte-template',
 	description: 'svelte-template',
