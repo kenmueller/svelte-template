@@ -1,7 +1,7 @@
 <script lang="ts">
-	import MetaImage from '../components/Meta/Image.svelte'
-	import MetaTitle from '../components/Meta/Title.svelte'
-	import MetaDescription from '../components/Meta/Description.svelte'
+	import MetaImage from '$components/Meta/Image.svelte'
+	import MetaTitle from '$components/Meta/Title.svelte'
+	import MetaDescription from '$components/Meta/Description.svelte'
 </script>
 
 <MetaImage />

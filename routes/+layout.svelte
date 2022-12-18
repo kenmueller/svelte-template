@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { LayoutData } from './$types'
 
-	import MetaBase from '../components/Meta/Base.svelte'
-	import PageTransition from '../components/Transition/Page.svelte'
+	import MetaBase from '$components/Meta/Base.svelte'
+	import PageTransition from '$components/Transition/Page.svelte'
 
 	export let data: LayoutData
 </script>

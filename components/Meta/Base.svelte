@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 
-	import touch from '../../images/touch.png'
+	import touch from '$images/touch.png'
 </script>
 
 <svelte:head>

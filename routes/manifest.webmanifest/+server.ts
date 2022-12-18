@@ -4,8 +4,8 @@ import type { RequestHandler } from './$types'
 
 import errorFromValue from '$lib/error/from/value'
 
-import touch from '../../images/touch.png'
-import mask from '../../images/mask.png'
+import touch from '$images/touch.png'
+import mask from '$images/mask.png'
 
 const manifest: WebAppManifest = {
 	dir: 'ltr',

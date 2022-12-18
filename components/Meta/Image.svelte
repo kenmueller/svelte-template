@@ -1,6 +1,6 @@
 <script lang="ts">
-	import favicon from '../../images/icon.png'
-	import preview from '../../images/preview.png'
+	import favicon from '$images/icon.png'
+	import preview from '$images/preview.png'
 
 	export let icon = favicon
 	export let value = preview
