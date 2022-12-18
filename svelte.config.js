@@ -23,6 +23,11 @@ const config = {
 	},
 	kit: {
 		adapter: adapter(),
+		alias: {
+			$components: 'components',
+			$images: 'images',
+			$styles: 'styles'
+		},
 		files: {
 			assets: 'public',
 			hooks: {
@@ -41,8 +46,7 @@ const config = {
 				'script-src': ['self', 'unsafe-inline'],
 				'style-src': ['self', 'unsafe-inline']
 			}
-		},
-		trailingSlash: 'never'
+		}
 	}
 }
 
